@@ -33,6 +33,6 @@ fi;
 
 docker-compose up -d;
 
-sleep 35;
+sleep 45;
 cd ..;
 npm run dev;
