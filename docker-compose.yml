@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  dbmysql:
+    image: mysql:latest
+    restart: always
+    container_name: db_auth
+    environment:
+      MYSQL_ROOT_PASSWORD: saravia
+      MYSQL_DATABASE: auth_angular
+      MYSQL_USERNAME: luis.saravia
+      MYSQL_PASSWORD: saravia
+    
+    ports:
+      - "3321:3306"
+    volumes:
+      - ./backups:/var/lib/mysql
+      - ./table:/docker-entrypoint-initdb.d
