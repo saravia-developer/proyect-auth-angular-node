@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   dbmysql:
     image: mysql:latest
     restart: always
@@ -11,7 +10,6 @@ services:
       MYSQL_DATABASE: auth_angular
       MYSQL_USER: luis.saravia
       MYSQL_PASSWORD: saravia
-    
     ports:
       - "3321:3306"
     volumes:
@@ -23,6 +21,7 @@ services:
   backend:
     depends_on:
       - dbmysql
+    restart: always
     build:
       context: ./api-login-auth
       dockerfile: Dockerfile
@@ -34,6 +33,7 @@ services:
   frontend:
     depends_on:
       - backend
+    restart: always
     build:
       context: ./login-angular
       dockerfile: Dockerfile
@@ -47,5 +47,6 @@ volumes:
 
 networks:
   app-network:
+    name: "app-network"
     driver: bridge
     external: true
