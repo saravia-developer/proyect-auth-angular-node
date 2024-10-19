@@ -1,9 +1,9 @@
-mkdir frontend;
-cd frontend;
-git clone https://github.com/saravia-developer/login-angular.git;
+# mkdir frontend;
+# cd frontend;
+# git clone https://github.com/saravia-developer/login-angular.git;
 
-sleep 25;
+# sleep 25;
 
-cd login-angular;
-npm install;
-npm start
+# cd login-angular;
+# npm install;
+# npm start

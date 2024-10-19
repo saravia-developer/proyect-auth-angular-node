@@ -9,11 +9,43 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: saravia
       MYSQL_DATABASE: auth_angular
-      MYSQL_USERNAME: luis.saravia
+      MYSQL_USER: luis.saravia
       MYSQL_PASSWORD: saravia
     
     ports:
       - "3321:3306"
     volumes:
-      - ./backups:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
       - ./table:/docker-entrypoint-initdb.d
+    networks:
+      - app-network
+
+  backend:
+    depends_on:
+      - dbmysql
+    build:
+      context: ./api-login-auth
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ./login-angular
+      dockerfile: Dockerfile
+    ports:
+      - "4400:4400"
+    networks:
+      - app-network
+
+volumes:
+  db_data: 
+
+networks:
+  app-network:
+    driver: bridge
+    external: true
