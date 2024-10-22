@@ -24,10 +24,9 @@ services:
     depends_on:
       dbmysql:
         condition: service_healthy
+    image: saraviadeveloper/api-auth
     restart: always
-    build:
-      context: ./api-login-auth
-      dockerfile: Dockerfile
+    
     ports:
       - "3000:3000"
     networks:
@@ -36,10 +35,9 @@ services:
   frontend:
     depends_on:
       - backend
+    image: saraviadeveloper/frontend-auth
     restart: always
-    build:
-      context: ./login-angular
-      dockerfile: Dockerfile
+
     ports:
       - "4400:4400"
     networks:
