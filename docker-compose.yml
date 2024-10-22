@@ -15,12 +15,15 @@ services:
     volumes:
       - ./db_data:/var/lib/mysql
       - ./table:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
     networks:
       - app-network
 
   backend:
     depends_on:
-      - dbmysql
+      dbmysql:
+        condition: service_healthy
     restart: always
     build:
       context: ./api-login-auth
